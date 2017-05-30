@@ -10,8 +10,7 @@
 get_header();?>
 <div class="container">
 	<div class="row">
-		<?php
-		
+		<?php		
 		// if(is_user_logged_in()){
 		// 	echo '<script async defer>
 		// 	location.assign("/wordpress");

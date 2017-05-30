@@ -631,27 +631,6 @@ function check_vc_activate(){
 function initializeVcElements(){
 	$elements = array(
 			array(
-				"name"=>"Single Box",
-				"base"=>"box",
-				"category"=>"Charity",
-				"params"=>array(
-					array(
-						"type" => "textfield",
-						"heading" => __("Title", ""),
-						"param_name" => "heading",
-						"description" => __("Insert the title.", ""),
-						"admin_label" => true
-						),
-					array(
-						"type" => "textarea",
-						"heading" => __("Content", ""),
-						"param_name" => "contents",
-						"description" => __("Insert content.", ""),
-						"admin_label" => true
-						)
-					)
-			),
-			array(
 				"name"=>"Image SLider",
 				"base"=>"slider",
 				"category"=>"Charity",
@@ -686,6 +665,62 @@ function initializeVcElements(){
 					// 	)
 					)
 			),
+			array(
+				"name"=>"Simple team",
+				"base"=>"simple_team",
+				"category"=>"Charity",
+				"params"=>array(
+					array(
+						"type" => "textfield",
+						"heading" => __("Image url", ""),
+						"param_name" => "url",
+						"description" => __("Insert Image url.", ""),
+						"admin_label" => true
+						),
+					array(
+						"type" => "textfield",
+						"heading" => __("Image title", ""),
+						"param_name" => "title",
+						"description" => __("Insert title.", ""),
+						"admin_label" => true
+						),
+					array(
+						"type" => "textarea",
+						"heading" => __("Image description", ""),
+						"param_name" => "description",
+						"description" => __("Insert description.", ""),
+						"admin_label" => true
+						),
+					// array(
+					// 	"type" => "textarea",
+					// 	"heading" => __("Content", ""),
+					// 	"param_name" => "contents",
+					// 	"description" => __("Insert content.", ""),
+					// 	"admin_label" => true
+					// 	)
+					)
+			),
+			array(
+				"name"=>"Simple Textbox",
+				"base"=>"simple_texbox",
+				"category"=>"Charity",
+				"params"=>array(
+					array(
+						"type" => "textfield",
+						"heading" => __("Title", ""),
+						"param_name" => "title",
+						"description" => __("Insert title.", ""),
+						"admin_label" => true
+						),
+					array(
+						"type" => "textfield",
+						"heading" => __("Sub Title", ""),
+						"param_name" => "subtitle",
+						"description" => __("Insert Sub title.", ""),
+						"admin_label" => true
+						),
+					)
+			),
 		);
 	foreach ($elements as $element) {
 		vc_map($element);
@@ -718,7 +753,7 @@ function slider_func( $atts ) {
 	$images=explode(",",$atts['ids']);
 	$titles=explode(",",$atts['titles']);
 	$descriptions=explode(";",$atts['descriptions']);
-	var_dump(count($images));
+	// var_dump(count($images));
 	$output='<div class="owl-carousel nekoDataOwl" data-neko_items="1" data-neko_singleitem="true" data-neko_paginationnumbers="true" data-neko_transitionstyle="fadeUp">';
 	for ($i=0; $i < count($images); $i++) {
 		$output.='<div class="item">
@@ -734,23 +769,50 @@ function slider_func( $atts ) {
 					</div>
 				</div>';
 	}
-	$output.='<div>';
+	$output.='</div>';
 
 	return $output;
 }
 add_shortcode( 'slider', 'slider_func' );
 
-function boxes_func( $atts ) {
+function simple_team( $atts ) {
 	$atts = shortcode_atts( array(
-		'heading' => '',
-		'contents' => '',
-		'icon_name'=>''
-		), $atts, 'box' );
+		'url' => '',
+		'description' => '',
+		'title'=>''
+		), $atts, 'simple_team' );
+	$output='';
+	$url=$atts['url'];
+	$title=$atts['title'];
+	$descriptio=$atts['description'];
+	$output.='<article class="boxIcon">
+				<a href="#">
+					<div class="imgBorder">
+						<img class="img-circle img-responsive" src="'.$atts['url'].'" alt="" />
+					</div>
+					<h2>'.$atts['title'].'</h2>
+					<p>'.$atts['description'].'</p>
+				</a>
+			</article>';
+
+	return $output;
+}
+add_shortcode( 'simple_team', 'simple_team' );
+
+function simple_texbox( $atts ) {
+	$atts = shortcode_atts( array(
+		'title' => '',
+		'subtitle' => ''
+		), $atts, 'simple_texbox' );
 	return '
-	<h1>'.$atts['heading'].'</h1>
+	<div class="span12 text-center mb40">
+		<h1>'.$atts['title'].'</h1>
+		<h2 class="subTitle">'.$atts['subtitle'].'</h2>
+	</div>
 	';
 }
-add_shortcode( 'box', 'boxes_func' );
+add_shortcode( 'simple_texbox', 'simple_texbox' );
+
 
 /**
 
@@ -805,4 +867,3 @@ add_shortcode( 'box', 'boxes_func' );
 	add_action( 'wp_enqueue_scripts', 'custom_theme_scripts' );
 
 	/*=====  End of  Custom files adding and visual composer configuration  ======*/
-

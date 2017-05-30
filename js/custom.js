@@ -519,23 +519,21 @@ jQuery(document).ready(function($) {
     */
 
     if($('.nekoDataOwl').length){
-
         $( '.nekoDataOwl' ).each(function( index ) {
-
-            $(this).owlCarousel(
+            $( '.nekoDataOwl' ).owlCarousel(
             {
-                items:$(this).data('neko_items'),
-                navigation:$(this).data('neko_navigation'),
-                singleItem:$(this).data('neko_singleitem'),
-                autoPlay:$(this).data('neko_autoplay'),
-                itemsScaleUp:$(this).data('neko_itemsscaleup'),
-                navigationText:['<i class="icon-left-open"></i>','<i class="icon-right-open"></i>'], 
-                pagination:$(this).data('neko_pagination'),
-                paginationNumbers:$(this).data('neko_paginationnumbers'),
-                autoHeight:$(this).data('neko_autoheight'),
-                mouseDrag:$(this).data('neko_mousedrag'),
-                transitionStyle:$(this).data('neko_transitionstyle'),
-                responsive:true
+                items:'1',
+                navigation:true,
+                // singleItem:'true',
+                // autoPlay:'false',
+                // itemsScaleUp:$(this).data('neko_itemsscaleup'),
+                // navigationText:['<i class="icon-left-open"></i>','<i class="icon-right-open"></i>'], 
+                // pagination:$(this).data('neko_pagination'),
+                // paginationNumbers:$(this).data('neko_paginationnumbers'),
+                // autoHeight:$(this).data('neko_autoheight'),
+                // mouseDrag:$(this).data('neko_mousedrag'),
+                // transitionStyle:$(this).data('neko_transitionstyle'),
+                // responsive:'true'
          
             });
 
